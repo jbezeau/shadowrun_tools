@@ -49,6 +49,7 @@ export function StageUp (successes:number, damage:DamageCode):DamageCode {
             }
             case WoundLevel.M: {
                 staged_damage = WoundLevel.S;
+                break;
             }
             case WoundLevel.L: {
                 staged_damage = WoundLevel.M;
