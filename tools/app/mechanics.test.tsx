@@ -1,6 +1,7 @@
 import { expect, test } from "vitest";
 import { CharAttr, CharInfo, CharSkill, Stat,
-  Check as SkillCheck, Roll, SkillRoll, Sum } from "./mechanics";
+  Check as SkillCheck, Roll, SkillRoll, Sum, 
+  SkillDice} from "./mechanics";
 
 test("Rolling dice", () => {
   let outcome:number[] = Roll(3);
@@ -26,6 +27,7 @@ test("Skill Rolls", () => {
   const testChar:CharInfo = {name:"Guy LeGuy", 
     stats:[testStats,testStats,testStats,testStats,testStats,testStats], 
     skills:[testFirearms, testElectronics]};
+  expect (SkillDice(testChar, skillA, Stat.QUI), "H&K227 at 7 dice").toBe(7);
   expect (SkillRoll(testChar, skillA, Stat.QUI).length, "H&K227 at 7 dice").toBe(7);
 
   const skillB:string[] = ["firearms","smg","tmp"];

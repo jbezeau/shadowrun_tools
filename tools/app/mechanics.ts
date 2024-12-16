@@ -48,7 +48,15 @@ export function Roll(n: number):number[] {
 
 // find out how many dice to roll for a skill check
 // inputs: character sheet, base/con/spec skill names, default attribute
+// keeping this around just for convenience
 export function SkillRoll (char: CharInfo, required:string[], attr:Stat):number[] {
+  return Roll (SkillDice (char, required, attr));
+}
+
+// decouple determining skill dice and actually rolling them 
+// * what if we want to generate a dice pool and split it, then roll each split?
+// * what if we want to penalize the number of dice?
+export function SkillDice (char: CharInfo, required:string[], attr:Stat):number {
   var skillLvl = 0;
   // nested if statements ON PURPOSE, I want to fail fast if BASE skill doesn't match
   char.skills.map((i:CharSkill) => {
@@ -77,10 +85,12 @@ export function SkillRoll (char: CharInfo, required:string[], attr:Stat):number[
     skillLvl = Math.ceil(statLvl[statLvl.length-1] / 2);
   }
 
-  return Roll(skillLvl);
+  return skillLvl;
 }
 
 // test a roll against target number, penalties, threshold value, etc
+// inputs: outcome of Roll(), target number per die for a "success", required success level
+// return: number of net successes which may be negative (often w/ attacks vs heavy armor)
 export function Check (roll:number[], tn:number, threshold:number):number {
   var successes = 0;
   roll.map((d:number) => {
