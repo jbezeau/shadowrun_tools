@@ -66,6 +66,9 @@ export function InitiativeRoll (char:CharInfo):number {
     return BoostedAttr(char, Stat.REA) + Sum(Roll(BoostedAttr(char, Stat.INI)));
 }
 
+// magic numbers for the initiative tracker elements
+export enum TrackerValues {"INIT", "CHAR"};
+
 // roll everyone's initiative and return a track
 export function InitiativeStart (characters:CharInfo[]):Map<number, CharInfo> {
     var track:Map<number, CharInfo>=new Map;
@@ -74,7 +77,14 @@ export function InitiativeStart (characters:CharInfo[]):Map<number, CharInfo> {
         track.set(InitiativeRoll(c), c);
         i++;
     });
-    return track;
+
+    // get an array from track and sort it on initiative order
+    // a, b are of type [initiative score, character] 
+    // sorted in descending order if b[initiative score] > a[initiative score]
+    var sorted = Array.from(track.entries()).sort((a, b) => 
+        b[TrackerValues.INIT]-a[TrackerValues.INIT]
+    );
+    return new Map(sorted);
 }
 
 // return the next initiative value
@@ -93,8 +103,9 @@ export function InitiativeUpdate (track:Map<number, CharInfo>):Map<number, CharI
     const nextNum = InitiativeNum(track);
     const nextChar = InitiativeChar(track);
 
-    // this lowkey keeps us from setting nextChar if happens to be undefined
-    if (track.delete(nextNum) && nextNum >= 10) {
+    // take the current initiative off of the tracker
+    if (track.delete(nextNum) && nextNum > 9) {
+        // put the character back on if 1. they're real, 2. their initiative is 10+
         if (nextChar) { track.set(nextNum-7, nextChar) }
     }
 

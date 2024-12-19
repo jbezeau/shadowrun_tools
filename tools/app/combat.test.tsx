@@ -44,6 +44,25 @@ test("initiative", () => {
     console.log(InitiativeNum(tracker));
     expect(InitiativeChar(tracker), "Joe wins").toStrictEqual(joe);
 
+    // rig initiative to ensure that jay doesn't get a second turn
+    tracker = new Map<number, CharInfo>();
+    tracker.set(10, joe);
+    tracker.set(9, jay);
+
+    // test that tracker returns initiatives in descending order
+    const initNums = tracker.keys();
+    var ordered:boolean = true;
+    var i:number=100; // very high starting value
+
+    // check each initiative number with its next neighbour
+    // if the following number is higher then the initiative is not ordered
+    initNums.forEach((value:number, index:number) => {
+        if (i < value) {ordered=false};
+        i=value;
+    });
+
+    expect(ordered, "Confirm initiative tracker is sorted").toBe(true);
+
     // now we don't know who goes next but we can be sure both characters still have actions
     tracker = InitiativeUpdate(tracker);
     expect(tracker.size, "Still 2 characters left to act after Joe's first").toBe(2);
