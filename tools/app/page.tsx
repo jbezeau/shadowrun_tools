@@ -12,7 +12,9 @@ export const metadata = {
   title: "output test",
 };
 
-export default function Page() {
+export default async function Page() {
+  let apiCall = await fetch("http://localhost:3000/character");
+  let greeting = apiCall.json();
   let example:CharInfo = 
   {
     name:"Trish Panda", 
@@ -24,7 +26,7 @@ export default function Page() {
   };
 
   return <>
-    <h1>App Router</h1>
+    <h1>{greeting}</h1>
     <Dice n={3} />
     <Character char={example} />
     <InitiativeTrack track={InitiativeStart([example])} />
