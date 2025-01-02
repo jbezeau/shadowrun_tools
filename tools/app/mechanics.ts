@@ -1,29 +1,14 @@
 import { Weapon, Armor } from "./equipment";
+import { AttrLvl, CharAttr, Stat } from "./attributes";
+import { CharSkill, SkillTypes } from "./skills";
 
 // Gameplay functions for shadowrun
 
 // the character sheet interfaces are designed to make the JSON look concise
 // rather than a lot of named fields I prefer to use arrays and then enum the array positions
 
-// describe an attribute level
-// array positions represent normal and enhanced attribute, enhanced is usually unaffected by magic
-export const enum AttrLvl  {NAT, AUG}
-export interface CharAttr {
-  level:number[],
-}
 
-// describe one skill, character has an array of these
-// array positions in skill and skillLvl correspond to general, concentration, and specialization
-export const enum SkillTypes  {BASE, GROUP, SPEC}
-export interface CharSkill {
-  skill:string[],
-  skillLvl:number[],
-}
-
-// describe a character,
-// attributes are unique and non-repeating
-// stats array is referenced by enum
-export const enum Stat {BOD, QUI, STR, CHA, INT, WIL, MAG, ESS, REA, INI}
+// probably move this to a character sheet .ts at some point
 export interface CharInfo {
   name:string,
   stats:CharAttr[],

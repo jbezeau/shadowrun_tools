@@ -1,0 +1,40 @@
+.vertical {
+  border-style: solid;
+  border-color:black;
+  display:flexbox;
+  flex-direction:column;
+}
+
+.vertical > * {
+  flex:1;
+};
+
+.horizontal {
+  border-style: solid;
+  border-color: black;
+  display: flexbox;
+  flex-direction: row;
+}
+
+.horizontal > * {
+  flex:1;
+}
+
+.title {
+  color:darkgoldenrod;
+  flex:2;
+}
+
+.label {
+  color:red;
+  flex:1;
+}
+
+.button {
+  color:blue;
+  flex:1;
+}
+
+.input {
+  flex:2;
+}

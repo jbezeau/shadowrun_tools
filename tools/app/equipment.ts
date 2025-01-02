@@ -1,7 +1,7 @@
 import "./health";
 import { DamageCode, WoundLevel } from "./health";
 
-export const enum Code {LEGAL, PERSONAL, RESTRICTED, SECURITY, MILITARY}
+export const enum Code {LEGAL, PROFILED, RESTRICTED, SECURITY, MILITARY}
 export const enum DamageType {BALLISTIC,IMPACT}
 
 // describe weapons
@@ -29,7 +29,7 @@ export const Fists:Weapon = {
 }
 export const Predator:Weapon = { 
     DMG:{PWR:4, LVL:WoundLevel.M, STG:2, stun:false}, RNG:7, type:DamageType.BALLISTIC,
-         code:Code.PERSONAL, conceal:4, skill:["firearms","pistol","predator"],
+         code:Code.PROFILED, conceal:4, skill:["firearms","pistol","predator"],
 };
 
 export const Clothing:Armor = {

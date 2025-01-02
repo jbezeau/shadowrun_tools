@@ -13,8 +13,9 @@ export const metadata = {
 };
 
 export default async function Page() {
+  // fuckin' await
   let apiCall = await fetch("http://localhost:3000/character");
-  let greeting = apiCall.json();
+  let greeting = await apiCall.json();
   let example:CharInfo = 
   {
     name:"Trish Panda", 
