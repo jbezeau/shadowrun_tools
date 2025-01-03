@@ -1,7 +1,7 @@
 import { expect, test } from "vitest";
-import { CharAttr, CharInfo, CharSkill, Stat,
-  Check as SkillCheck, Roll, SkillRoll, Sum, 
-  SkillDice} from "./mechanics";
+import { CharAttr, Stat } from "./attributes";
+import { CharSkill } from "./skills";
+import { CharInfo, Check as SkillCheck, Roll, SkillRoll, Sum, SkillDice} from "./mechanics";
 
 test("Rolling dice", () => {
   let outcome:number[] = Roll(3);
